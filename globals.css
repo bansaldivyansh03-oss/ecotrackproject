@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+:root {
+  --canopy: #142B22;      /* near-black forest green — dark surface */
+  --canopy-2: #1E3D30;    /* elevated dark surface */
+  --moss: #4C7A5B;        /* primary accent */
+  --moss-light: #6E9A7C;
+  --lichen: #A8C686;      /* secondary highlight / growth */
+  --bark: #6B5340;        /* neutral grounding */
+  --mist: #F4F1E8;        /* warm light background */
+  --paper: #FBFAF5;       /* light surface */
+  --ember: #D9713C;       /* streaks / coins / alerts */
+  --sky: #3E7C8C;         /* water / electricity data */
+  --ink: #16241D;         /* light-mode text */
+  --ink-soft: #4B5A52;
+
+  --background: var(--mist);
+  --surface: var(--paper);
+  --foreground: var(--ink);
+  --foreground-soft: var(--ink-soft);
+  --border-soft: rgba(20, 43, 34, 0.1);
+}
+
+.dark {
+  --background: var(--canopy);
+  --surface: var(--canopy-2);
+  --foreground: #EAF2EA;
+  --foreground-soft: #B7C8BE;
+  --border-soft: rgba(234, 242, 234, 0.1);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-foreground-soft: var(--foreground-soft);
+  --color-canopy: var(--canopy);
+  --color-canopy-2: var(--canopy-2);
+  --color-moss: var(--moss);
+  --color-moss-light: var(--moss-light);
+  --color-lichen: var(--lichen);
+  --color-bark: var(--bark);
+  --color-mist: var(--mist);
+  --color-ember: var(--ember);
+  --color-sky: var(--sky);
+  --color-border-soft: var(--border-soft);
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-manrope);
+  --font-mono: var(--font-plex-mono);
+}
+
+* {
+  border-color: var(--border-soft);
+}
+
+html { color-scheme: light; }
+html.dark { color-scheme: dark; }
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--lichen); color: var(--canopy); }
+
+/* Signature element: growth-ring keyframes (tree-ring fill for Carbon Score) */
+@keyframes ring-grow {
+  from { stroke-dashoffset: var(--ring-circumference); }
+  to { stroke-dashoffset: var(--ring-offset); }
+}
+.ring-animate { animation: ring-grow 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+@keyframes rise-fade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise-fade { animation: rise-fade 0.5s ease forwards; }
+
+@keyframes sway {
+  0%, 100% { transform: rotate(-1.5deg); }
+  50% { transform: rotate(1.5deg); }
+}
+.sway { transform-origin: bottom center; animation: sway 4s ease-in-out infinite; }
+
+@keyframes drift {
+  0% { transform: translateX(-6%); }
+  100% { transform: translateX(106%); }
+}
+.drift { animation: drift linear infinite; }
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+.pulse-soft { animation: pulse-soft 2.2s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ring-animate, .rise-fade, .sway, .drift, .pulse-soft { animation: none !important; }
+}
+
+.scrollbar-none::-webkit-scrollbar { display: none; }
+.scrollbar-none { scrollbar-width: none; -ms-overflow-style: none; }

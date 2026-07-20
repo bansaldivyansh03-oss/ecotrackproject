@@ -1,0 +1,10 @@
+{
+  "name": "EcoTracker",
+  "short_name": "EcoTracker",
+  "description": "Track your carbon footprint and grow a living virtual forest.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#142B22",
+  "theme_color": "#142B22",
+  "icons": []
+}
